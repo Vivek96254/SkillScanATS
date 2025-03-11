@@ -163,9 +163,12 @@ const ResumeChecker = () => {
     }
   }, [response]);
   
-  const relevanceScore = Math.round(overallScore * 0.95);
-  const keywordsMatchScore = Math.round(overallScore * 1.05);
-  const skillsMatchScore = Math.round(overallScore * 1.1);
+  const getRandomMultiplier = () => Math.random() * (1.05 - 0.95) + 0.95;
+
+  const relevanceScore = Math.round(overallScore * getRandomMultiplier());
+  const keywordsMatchScore = Math.round(overallScore * getRandomMultiplier());
+  const skillsMatchScore = Math.round(overallScore * getRandomMultiplier());
+  
   const closePopup = () => {
     setShowPopup(false);
   };
