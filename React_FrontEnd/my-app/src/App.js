@@ -2,7 +2,7 @@ import './App.css';
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-
+import { Analytics } from '@vercel/analytics/react';
 
 const LogoIcon = () => (
   <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,10 +22,12 @@ const App = () => {
           <Route path="/interview-questions" element={<InterviewQuestions />} />
           <Route path="/" element={<Home />} />
         </Routes>
+        <Analytics /> {/* Add this line */}
       </div>
     </Router>
   );
 };
+
 
 const Navbar = () => {
   return (
