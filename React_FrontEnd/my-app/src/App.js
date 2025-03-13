@@ -135,7 +135,7 @@ const ResumeChecker = () => {
     formData.append("analysis_option", analysisType);
   
     try {
-      const res = await fetch("https://backend-skill-ihvv.onrender.com/analyze", {
+      const res = await fetch("https://skillscanats-l47q.onrender.com/analyze", {
         method: "POST",
         body: formData,
       });
