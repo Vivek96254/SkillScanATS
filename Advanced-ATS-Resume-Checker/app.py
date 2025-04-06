@@ -117,10 +117,10 @@ def get_gemini_output(resume_text, job_description, analysis_type):
             prompt = f"""
             You are a ResumeChecker, an expert in ATS optimization. Analyze the following resume and provide optimization suggestions:
             
-            1. Identify keywords from the job description that you think would be suitable for this resume that should be included in the resume.
+            1. Identify keywords that you think would be suitable for this resume that should be included in the resume.
             2. Suggest reformatting or restructuring to improve ATS readability.
             3. Recommend changes to improve keyword density without keyword stuffing.
-            4. Provide 3-5 bullet points on how to tailor this resume for the suitable job description.
+            4. Provide 3-5 bullet points on how to tailor this resume for job market.
             5. Give an overall ATS score out of 100. Title for this point in this format(Overall ATS Score (out of 100): score)
             
             Resume text: {resume_text}
