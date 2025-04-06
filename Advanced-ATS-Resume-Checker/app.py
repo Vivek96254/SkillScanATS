@@ -46,7 +46,6 @@ def get_gemini_output(resume_text, job_description, analysis_type):
     
     if analysis_type == "Quick Scan":
         if job_description:
-            
             prompt = f"""
             You are a ResumeChecker, an expert in resume analysis. Provide a quick scan of the following resume:
             
@@ -69,7 +68,6 @@ def get_gemini_output(resume_text, job_description, analysis_type):
             4. Give an overall ATS score out of 100. Title for this point in this format(Overall ATS Score (out of 100): score)
             
             Resume text: {resume_text}
-            Job description (if provided): {job_description}
             """
     elif analysis_type == "Detailed Analysis":
         if job_description:
@@ -99,7 +97,6 @@ def get_gemini_output(resume_text, job_description, analysis_type):
             6. Give an overall ATS score out of 100. Title for this point in this format(Overall ATS Score (out of 100): score)
             
             Resume text: {resume_text}
-            Job description (if provided): {job_description}
             """
     else:
         if job_description:
@@ -127,7 +124,6 @@ def get_gemini_output(resume_text, job_description, analysis_type):
             5. Give an overall ATS score out of 100. Title for this point in this format(Overall ATS Score (out of 100): score)
             
             Resume text: {resume_text}
-            Job description: {job_description}
             """
 
     
