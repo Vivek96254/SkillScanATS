@@ -700,7 +700,7 @@ button:active {
 }
 
 /* Questions list */
-ul {
+/* ul {
   list-style-type: none;
   padding-left: 0;
 }
@@ -716,6 +716,26 @@ li {
 }
 
 li:hover {
+  background-color: rgba(79, 70, 229, 0.1);
+   transform: translateX(2px); 
+} */
+
+.interview-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.interview-list li {
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  background-color: rgba(79, 70, 229, 0.05);
+  border-left: 3px solid var(--primary);
+  border-radius: 0 8px 8px 0;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.interview-list li:hover {
   background-color: rgba(79, 70, 229, 0.1);
   /* transform: translateX(2px); */
 }

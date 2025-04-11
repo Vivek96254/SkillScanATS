@@ -42,7 +42,7 @@ def extract_text_from_docx(docx_path):
     return text
 
 def get_gemini_output(resume_text, job_description, analysis_type):
-    model = GenerativeModel("gemini-1.5-flash")
+    model = GenerativeModel("models/gemini-2.5-pro-exp-03-25")
     
     if analysis_type == "Quick Scan":
         if job_description:

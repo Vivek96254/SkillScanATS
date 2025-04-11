@@ -445,7 +445,7 @@ const InterviewQuestions = () => {
         {questions.length > 0 && (
   <div className="mt-4 p-4 border border-gray-300 rounded w-full max-w-lg">
     <h2 className="text-lg font-semibold mb-2">{role} Interview Questions:</h2>
-    <ul className="list-disc pl-5 space-y-2">
+    <ul className="interview-list list-disc pl-5 space-y-2">
       {questions.map((qna, index) => (
         <li key={index} className="cursor-pointer">
           <span className="text-blue-600 hover:underline">{qna.question}</span>
@@ -493,36 +493,124 @@ const StudyPlan = () => {
   };
 
   
+  // const renderFormattedStudyPlan = () => {
+  //   if (!studyPlan) return null;
+    
+  //   const formatLine = (line) => {
+  //     return line.replace(/\*\*(.*?)\*\*/g, '$1');
+  //   };
+    
+  //   return (
+  //     <div className="markdown-content">
+  //       {studyPlan.split('\n').map((line, index) => {
+  //         const formattedLine = formatLine(line);
+          
+  //         if (/^##\s+/.test(formattedLine)) {
+  //           return <h1 key={index} className="text-3xl font-bold mt-4 mb-2">{formattedLine.replace(/^##\s+/, '')}</h1>;
+  //         }
+      
+  //         if (/Week \d+:/i.test(formattedLine)) {
+  //           return <h2 key={index} className="font-semibold mt-3">{formattedLine}</h2>;
+  //         }
+  //         else if (formattedLine.includes('Key Topics:') || 
+  //                  formattedLine.includes('Resources:') ||
+  //                  formattedLine.includes('Book:') ||
+  //                  formattedLine.includes('Website:') ||
+  //                  formattedLine.includes('Daily Practice')) {
+            
+  //           const parts = formattedLine.split(':');
+  //           if (parts.length > 1) {
+  //             const label = parts[0].trim();
+  //             const content = parts.slice(1).join(':').trim();
+              
+  //             if (formattedLine.includes('Key Topics:')) {
+  //               return (
+  //                 <div key={index} className="mt-3">
+  //                   <span className="font-bold">Key Topics: </span>
+  //                   <span>{content}</span>
+  //                 </div>
+  //               );
+  //             } else if (formattedLine.includes('Resources:')) {
+  //               return <h4 key={index} className="font-semibold mt-3">Resources:</h4>;
+  //             } else if (formattedLine.includes('Book:')) {
+  //               return (
+  //                 <div key={index} className="ml-4 my-1">
+  //                   <span className="font-semibold">Book: </span>
+  //                   <span>{content}</span>
+  //                 </div>
+  //               );
+  //             } else if (formattedLine.includes('Website:')) {
+  //               return (
+  //                 <div key={index} className="ml-4 my-1">
+  //                   <span className="font-semibold">Website: </span>
+  //                   <span>{content}</span>
+  //                 </div>
+  //               );
+  //             } else if (formattedLine.includes('Daily Practice')) {
+  //               return <h4 key={index} className="font-semibold mt-3">Daily Practice (LeetCode):</h4>;
+  //             }
+  //           }
+  //         }
+  //         else if (formattedLine.trim().startsWith('•')) {
+  //           return <div key={index} className="ml-4 my-1">{formattedLine}</div>;
+  //         }
+  //         else if (/^\d+\./.test(formattedLine.trim())) {
+  //           return <div key={index} className="ml-8 my-1">{formattedLine.trim()}</div>;
+  //         }
+  //         else if (formattedLine.trim() !== '') {
+  //           return <p key={index} className="my-1">{formattedLine}</p>;
+  //         }
+  //         return <div key={index} className="h-2"></div>;
+  //       })}
+  //     </div>
+  //   );
+  // };
+
   const renderFormattedStudyPlan = () => {
     if (!studyPlan) return null;
-    
+  
     const formatLine = (line) => {
-      return line.replace(/\*\*(.*?)\*\*/g, '$1');
+      return line
+        .replace(/\*\*(.*?)\*\*/g, '$1')  // Remove bold formatting
+        .replace(/\*(.*?)\*/g, '$1');     // Remove italic or leftover asterisks
     };
-    
+  
     return (
       <div className="markdown-content">
         {studyPlan.split('\n').map((line, index) => {
           const formattedLine = formatLine(line);
-          
+  
+          // Main headers
           if (/^##\s+/.test(formattedLine)) {
-            return <h1 key={index} className="text-3xl font-bold mt-4 mb-2">{formattedLine.replace(/^##\s+/, '')}</h1>;
+            return (
+              <h1 key={index} className="text-3xl font-bold mt-4 mb-2">
+                {formattedLine.replace(/^##\s+/, '')}
+              </h1>
+            );
           }
-      
+  
+          // Week headers
           if (/Week \d+:/i.test(formattedLine)) {
-            return <h2 key={index} className="font-semibold mt-3">{formattedLine}</h2>;
+            return (
+              <h2 key={index} className="font-semibold mt-3">
+                {formattedLine}
+              </h2>
+            );
           }
-          else if (formattedLine.includes('Key Topics:') || 
-                   formattedLine.includes('Resources:') ||
-                   formattedLine.includes('Book:') ||
-                   formattedLine.includes('Website:') ||
-                   formattedLine.includes('Daily Practice')) {
-            
+  
+          // Keyworded lines
+          if (
+            formattedLine.includes('Key Topics:') ||
+            formattedLine.includes('Resources:') ||
+            formattedLine.includes('Book:') ||
+            formattedLine.includes('Website:') ||
+            formattedLine.includes('Daily Practice')
+          ) {
             const parts = formattedLine.split(':');
             if (parts.length > 1) {
               const label = parts[0].trim();
               const content = parts.slice(1).join(':').trim();
-              
+  
               if (formattedLine.includes('Key Topics:')) {
                 return (
                   <div key={index} className="mt-3">
@@ -531,7 +619,11 @@ const StudyPlan = () => {
                   </div>
                 );
               } else if (formattedLine.includes('Resources:')) {
-                return <h4 key={index} className="font-semibold mt-3">Resources:</h4>;
+                return (
+                  <h4 key={index} className="font-semibold mt-3">
+                    Resources:
+                  </h4>
+                );
               } else if (formattedLine.includes('Book:')) {
                 return (
                   <div key={index} className="ml-4 my-1">
@@ -547,25 +639,65 @@ const StudyPlan = () => {
                   </div>
                 );
               } else if (formattedLine.includes('Daily Practice')) {
-                return <h4 key={index} className="font-semibold mt-3">Daily Practice (LeetCode):</h4>;
+                return (
+                  <h4 key={index} className="font-semibold mt-3">
+                    Daily Practice (LeetCode):
+                  </h4>
+                );
               }
             }
           }
-          else if (formattedLine.trim().startsWith('•')) {
+  
+          // Bold subheading like "Goal:", "Focus:", etc.
+          if (/^\s*(Goal|Topic|Topics|Task|Objective|Focus):\s*$/i.test(formattedLine)) {
+            return (
+              <div key={index} className="font-semibold mt-3">
+                {formattedLine.trim()}
+              </div>
+            );
+          }
+  
+          // Bullet point with "* " or "*" (with or without space)
+          if (/^\*\s?/.test(formattedLine)) {
+            return (
+              <li key={index} className="ml-6 list-disc">
+                {formattedLine.replace(/^\*\s?/, '')}
+              </li>
+            );
+          }
+  
+          // Dotted list (•)
+          if (formattedLine.trim().startsWith('•')) {
             return <div key={index} className="ml-4 my-1">{formattedLine}</div>;
           }
-          else if (/^\d+\./.test(formattedLine.trim())) {
-            return <div key={index} className="ml-8 my-1">{formattedLine.trim()}</div>;
+  
+          // Numbered points
+          if (/^\d+\./.test(formattedLine.trim())) {
+            return (
+              <div key={index} className="ml-8 my-1">
+                {formattedLine.trim()}
+              </div>
+            );
           }
-          else if (formattedLine.trim() !== '') {
-            return <p key={index} className="my-1">{formattedLine}</p>;
+  
+          // Regular non-empty line
+          if (formattedLine.trim() !== '') {
+            return (
+              <p key={index} className="my-1">
+                {formattedLine}
+              </p>
+            );
           }
+  
+          // Empty line
           return <div key={index} className="h-2"></div>;
         })}
       </div>
     );
   };
-
+  
+  
+  
   return (
     <div className="page-container p-4">
       <h1 className="text-2xl font-bold">Study Plan Generator</h1>
