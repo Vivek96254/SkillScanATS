@@ -717,7 +717,7 @@ li {
 
 li:hover {
   background-color: rgba(79, 70, 229, 0.1);
-  transform: translateX(2px);
+  /* transform: translateX(2px); */
 }
 
 /* Status messages */
