@@ -22,7 +22,7 @@ def generate_study_plan_with_gemini(role, weeks):
     """
 
     try:
-        model = genai.GenerativeModel("models/gemini-2.5-pro-exp-03-25")  
+        model = genai.GenerativeModel("gemini-1.5-flash")  
         response = model.generate_content(prompt)
         return response.text if hasattr(response, 'text') else str(response)
     except Exception as e:
