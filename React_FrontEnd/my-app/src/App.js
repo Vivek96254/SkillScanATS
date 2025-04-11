@@ -475,7 +475,7 @@ const StudyPlan = () => {
     setStudyPlan("");
 
     try {
-      const response = await fetch("https://skillscanats-1-sp1i.onrender.com/generate-study-plan", {
+      const response = await fetch("https://pythonbackend-oo83.onrender.com/generate-study-plan", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ role, weeks }),
